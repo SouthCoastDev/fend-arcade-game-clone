@@ -54,26 +54,41 @@ class Player {
         console.log("key pressed! : " + keyPress )
         // win condtion i.e player in water at end.
         if (this.y < 0) {
-            setTimeout(() => {
+
+                alert("yay you win!");
+                //reset to start.
                 this.x = 202;
                 this.y = 405;
-            }, 1000);
+
         }
-        //normal movement
-        switch (keyPress) {
-            case (keyPress == 'left' && this.x > 0):
-                this.x -= 102;
-                break;
-            case (keyPress == 'right' && this.x < 405):
-                this.x += 102;
-                break;
-            case (keyPress == 'up' && this.y > 0):
-                this.x -= 83;
-                break;
-            case (keyPress == 'down' && this.y < 405):
-                this.y += 83;
-                break;
+        //normal movement // make sure player is on board as well!
+
+        if(keyPress == 'left' && this.x > 0) {
+            this.x -= 102;
+        } else if (keyPress == 'right' && this.x < 405) {
+            this.x += 102;
+        } else if (keyPress == 'up' && this.y > 0) {
+            this.y -= 83;
+        } else if (keyPress == 'down' && this.y < 405) {
+            this.y += 83;
         }
+
+        //doesn't seem to work as  a switch!
+
+        // switch (keyPress) {
+        //     case (keyPress == 'left' && this.x > 0):
+        //         this.x -= 102;
+        //         break;
+        //     case (keyPress == 'right' && this.x < 405):
+        //         this.x += 102;
+        //         break;
+        //     case (keyPress == 'up' && this.y > 0):
+        //         this.x -= 83;
+        //         break;
+        //     case (keyPress == 'down' && this.y < 405):
+        //         this.y += 83;
+        //         break;
+        // }
     }
 }
 
