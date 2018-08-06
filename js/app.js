@@ -39,11 +39,11 @@ class Player {
         this.x = x;
         this.y = y;
         // image of player
-        this.player = 'images/char-horn-girl.png';
+        this.player = 'images/char-princess-girl.png';
     }
     //player update()
     update(dt) {
-        console.log("Player update called.");
+        //no need in this version
     }
     //player render()
     render() {
@@ -51,6 +51,7 @@ class Player {
     }
     //player handleInput()
     handleInput(keyPress) {
+        console.log("key pressed! : " + keyPress )
         // win condtion i.e player in water at end.
         if (this.y < 0) {
             setTimeout(() => {
