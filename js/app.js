@@ -1,94 +1,82 @@
 // Enemies our player must avoid
-var Enemy = function(x, y, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-    this.x = x;
-    this.y = y;
-    this.speed = speed;
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-}
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    this.x += this.speed * dt;
-
-    //handle enemies leaving canvas and coming back randomly
-    if(this.x > 510) {
-        this.x = -50;
-        //change this for random speed.
-        this.speed = 100 + Math.floor(Math.random()*155)
+class Enemy {
+    constructor(x, y, speed) {
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+        // The image/sprite for our enemies, this uses
+        // a helper we've provided to easily load images
+        this.sprite = 'images/enemy-bug.png';
     }
-
-
-    //handle enemy hitting the player
-
-    if(player.x < this.x + 80 &&
-        player.x + 80 > this.x &&
-        player.y < this.y + 60 &&
-        60 + player.y > this.y) {
+    // Update the enemy's position, required method for game
+    // Parameter: dt, a time delta between ticks
+    update(dt) {
+        this.x += this.speed * dt;
+        //handle enemies leaving canvas and coming back randomly
+        if (this.x > 510) {
+            this.x = -50;
+            //change this for random speed.
+            this.speed = 100 + Math.floor(Math.random() * 155);
+        }
+        //handle enemy hitting the player
+        if (player.x < this.x + 80 &&
+            player.x + 80 > this.x &&
+            player.y < this.y + 60 &&
+            60 + player.y > this.y) {
             //reset position:
-        player.x = 202;
-        player.y = 405;
+            player.x = 202;
+            player.y = 405;
+        }
     }
-
-
-}
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-var Player = function (x, y) {
-    this.x = x;
-    this.y = y;
-    // image of player
-    this.player = 'images/char-cat-girl.png';
-}
-
-//player update()
-Player.prototype.update = function (dt) {
-    console.log("Player update called.")
-}
-//player render()
-Player.prototype.render = function () {
-    ctx.drawImage(Resources.get(this.player), this.x, this.y);
-}
-
-//player handleInput()
-Player.prototype.handleInput = function (keyPress) {
-
-// win condtion i.e player in water at end.
-    if (this.y < 0) {
-        setTimeout(() => {
-            this.x = 202;
-            this.y = 405;
-        }, 1000);
-    }
-
-//normal movement
-    switch(keyPress) {
-        case (keyPress == 'left' && this.x > 0):
-            this.x -= 102;
-            break;
-        case (keyPress == 'right' && this.x < 405) :
-            this.x += 102;
-            break;
-        case (keyPress == 'up' && this.y > 0) :
-            this.x -= 83;
-            break;
-        case (keyPress == 'down' && this.y < 405) :
-            this.y += 83;
-            break;
+    // Draw the enemy on the screen, required method for game
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 }
+
+class Player {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        // image of player
+        this.player = 'images/char-horn-girl.png';
+    }
+    //player update()
+    update(dt) {
+        console.log("Player update called.");
+    }
+    //player render()
+    render() {
+        ctx.drawImage(Resources.get(this.player), this.x, this.y);
+    }
+    //player handleInput()
+    handleInput(keyPress) {
+        // win condtion i.e player in water at end.
+        if (this.y < 0) {
+            setTimeout(() => {
+                this.x = 202;
+                this.y = 405;
+            }, 1000);
+        }
+        //normal movement
+        switch (keyPress) {
+            case (keyPress == 'left' && this.x > 0):
+                this.x -= 102;
+                break;
+            case (keyPress == 'right' && this.x < 405):
+                this.x += 102;
+                break;
+            case (keyPress == 'up' && this.y > 0):
+                this.x -= 83;
+                break;
+            case (keyPress == 'down' && this.y < 405):
+                this.y += 83;
+                break;
+        }
+    }
+}
+
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
